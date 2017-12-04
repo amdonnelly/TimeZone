@@ -13,10 +13,13 @@ namespace Timezone
         {
             List<Tuple<string, string>> lTimes;
 
+            //Fetch contents of timezone embedded file
+            string _timeZoneFileContents = Timezone.Properties.Resources.TimezoneFile;
+
             //Read entries from text file and populate list
             using (Reader fileReader = new Reader())
             {
-                lTimes = fileReader.Read();
+                lTimes = fileReader.Read(_timeZoneFileContents);
             }
 
 
