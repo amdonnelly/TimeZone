@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timezone
+namespace Timezone.Main
 {
     class Program
     {        
@@ -14,7 +14,7 @@ namespace Timezone
             List<Tuple<string, string>> lTimes;
 
             //Fetch contents of timezone embedded file
-            string _timeZoneFileContents = Timezone.Properties.Resources.TimezoneFile;
+            string _timeZoneFileContents = Timezone.Main.Properties.Resources.TimezoneFile;
 
             //Read entries from text file and populate list
             using (Reader fileReader = new Reader())

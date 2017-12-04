@@ -7,8 +7,8 @@
     <ProjectGuid>{9AD31B2C-C6B3-42B0-AB97-B3462483BEBA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Timezone</RootNamespace>
-    <AssemblyName>Timezone</AssemblyName>
+    <RootNamespace>Timezone.Main</RootNamespace>
+    <AssemblyName>Timezone.Main</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

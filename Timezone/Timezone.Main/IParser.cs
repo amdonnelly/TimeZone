@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timezone
+namespace Timezone.Main
 {
-    interface IReader
+    interface IParser
     {
-        List<Tuple<string, string>> Read(string _contents);
+        string DisplayTime(string time, string location);
     }
 }
