@@ -11,11 +11,35 @@ namespace Timezone
     {        
         static void Main(string[] args)
         {
-            Parser timeZoneParser = new Parser();
+            List<Tuple<string, string>> lTimes;
+
+            //Read entries from text file and populate list
             using (Reader fileReader = new Reader())
             {
-                List<Tuple<string, string>> lTimes = fileReader.Read();
+                lTimes = fileReader.Read();
             }
+
+
+            
+            if (lTimes != null)
+            {
+                Parser timeZoneParser = new Parser();
+
+                //iterate through list and generate result for each entry
+                foreach (Tuple<string, string> _timeZone in lTimes)
+                {
+                    string _result = timeZoneParser.DisplayTime(_timeZone.Item1, _timeZone.Item2);
+
+                    if (!String.IsNullOrEmpty(_result))
+                    {
+                        Console.WriteLine(_result);
+                    }
+
+                }
+            }
+
+
+            Console.ReadKey();
         }
     }
 }
