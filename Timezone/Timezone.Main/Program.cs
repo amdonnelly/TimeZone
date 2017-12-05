@@ -18,20 +18,34 @@ namespace Timezone.Main
 
         static void Main(string[] args)
         {
-            List<Tuple<string, string>> lTimes;
+            List<Tuple<string, string>> lTimes = new List<Tuple<string, string>>(); ;
 
             //Fetch contents of timezone embedded file
-            string _timeZoneFileContents = Timezone.Main.Properties.Resources.TimezoneFile;
+            StringBuilder _timeZoneFileContents = new StringBuilder();
+            try
+            {
+                _timeZoneFileContents.Append(Timezone.Main.Properties.Resources.ResourceManager.GetObject("TimezoneFile"));
+            }
+            catch(Exception ex)
+            {
+                Logger.Error("There was an error reading the Timezone file : " + ex.Message);
+            }
+            
 
             //Read entries from text file and populate list
-            using (Reader fileReader = new Reader())
+            if (_timeZoneFileContents.Length > 0)
             {
-                lTimes = fileReader.Read(_timeZoneFileContents);
+                using (Reader fileReader = new Reader())
+                {
+                    lTimes = fileReader.Read(_timeZoneFileContents.ToString());
+                }
             }
 
 
-            
-            if (lTimes != null)
+
+
+
+            if (lTimes.Count>0)
             {
                 Parser timeZoneParser = new Parser();
 
