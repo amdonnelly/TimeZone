@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 using log4net;
 
+using Timezone.Core;
+using Timezone.Core.Interfaces;
+
 namespace Timezone.Main
 {
     class Program
