@@ -8,6 +8,6 @@ namespace Timezone.Core.Interfaces
 {
     interface IReader
     {
-        List<Tuple<string, string>> Read(string _contents);
+        T Read<T>(string _contents) where T : IList<Tuple<string, string>>, new();
     }
 }

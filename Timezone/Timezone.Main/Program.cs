@@ -37,7 +37,7 @@ namespace Timezone.Main
             {
                 using (Reader fileReader = new Reader())
                 {
-                    lTimes = fileReader.Read(_timeZoneFileContents.ToString());
+                    lTimes = fileReader.Read<List<Tuple<string, string>>>(_timeZoneFileContents.ToString());
                 }
             }
 

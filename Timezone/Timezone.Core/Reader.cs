@@ -9,12 +9,12 @@ using Timezone.Core.Interfaces;
 
 namespace Timezone.Core
 {
-	public class Reader : IReader, IDisposable
-    {
-        public List<Tuple<string, string>> Read(string _contents)
-        {
-			List<Tuple<string, string>> lReturn = new List<Tuple<string, string>>();
 
+    public class Reader : IReader, IDisposable                           
+    {
+        public T Read<T>(string _contents) where T : IList<Tuple<string, string>>, new()
+        {
+            T lReturn = new T();
 
             if (!String.IsNullOrEmpty(_contents))
             {

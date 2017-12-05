@@ -19,7 +19,7 @@ namespace Timezone.Core.Tests
 			List<Tuple<string, string>> lTimes;
 			using (Reader fileReader = new Reader())
 			{
-				lTimes = fileReader.Read(fileContents.ToString());
+				lTimes = fileReader.Read<List<Tuple<string, string>>>(fileContents.ToString());
 			}
 
 
