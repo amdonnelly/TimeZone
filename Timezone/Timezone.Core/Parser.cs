@@ -108,7 +108,7 @@ namespace Timezone.Core
                         DateTime _convertedDateTime = TimeZoneInfo.ConvertTime(_ukDateTime, _timezone);
 
 
-                        string _result = $"The time in the UK is {_ukDateTime.Hour}:{_ukDateTime.Minute} and the time in {_timeZoneName} is {_convertedDateTime.Hour}:{_convertedDateTime.Minute}";
+                        string _result = $"The time in the UK is {_ukDateTime.Hour}:{_ukDateTime.Minute} and the time in {location} is {_convertedDateTime.Hour}:{_convertedDateTime.Minute}";
 
                         return _result;
                     }
