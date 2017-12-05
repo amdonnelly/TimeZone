@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timezone.Main", "Timezone.Main\Timezone.Main.csproj", "{9AD31B2C-C6B3-42B0-AB97-B3462483BEBA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timezone.Core", "Timezone.Core\Timezone.Core.csproj", "{10E0F336-507E-4207-8E2C-78E60A08EEBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timezone.Core.Tests", "Timezone.Core.Tests\Timezone.Core.Tests.csproj", "{1A98F244-A66D-4DA0-AECA-1589DEA37422}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{10E0F336-507E-4207-8E2C-78E60A08EEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10E0F336-507E-4207-8E2C-78E60A08EEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10E0F336-507E-4207-8E2C-78E60A08EEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A98F244-A66D-4DA0-AECA-1589DEA37422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A98F244-A66D-4DA0-AECA-1589DEA37422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A98F244-A66D-4DA0-AECA-1589DEA37422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A98F244-A66D-4DA0-AECA-1589DEA37422}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
