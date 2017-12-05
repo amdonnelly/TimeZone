@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Timezone.Core.Interfaces;
+using log4net;
 
 namespace Timezone.Core
 {
 
 	public class Parser : IParser
     {
-
+        private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Returns the timezone name for the provided location
@@ -53,6 +54,11 @@ namespace Timezone.Core
                 default:
                     _result.Append(string.Empty);
                     break;
+            }
+
+            if (_result.Length == 0)
+            {
+                Logger.Info("No timezone name for " + location);
             }
 
             return _result.ToString();

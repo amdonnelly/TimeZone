@@ -24,7 +24,7 @@ namespace Timezone.Core
                 {
                     string[] sLineParts = part.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    Tuple<string, string> timeZone = new Tuple<string, string>(sLineParts.First(), sLineParts.Last());
+                    Tuple<string, string> timeZone = new Tuple<string, string>(sLineParts.First().Trim(), sLineParts.Last().Trim());
 
                     lReturn.Add(timeZone);
                 }
