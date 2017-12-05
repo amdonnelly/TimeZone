@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 using Timezone.Core.Interfaces;
 
@@ -96,9 +95,6 @@ namespace Timezone.Core
         /// <returns></returns>
         public string DisplayTime(string time, string location)
         {			
-			Contract.Requires(!String.IsNullOrEmpty(time), "Time must not be empty");
-			Contract.Requires(!String.IsNullOrEmpty(location), "Location must not be empty");
-
 			string _timeZoneName = GetTimeZoneName(location);
 
             if (!String.IsNullOrEmpty(_timeZoneName))
