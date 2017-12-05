@@ -18,22 +18,52 @@ namespace Timezone.Main
 
         static void Main(string[] args)
         {
-            List<Tuple<string, string>> lTimes = new List<Tuple<string, string>>(); ;
-  
             //Fetch contents of timezone embedded file
+            string _timeZoneFileContents = ReadTextFileContents("TimezoneFile");
+
+            //Read entries from text file and populate list
+            List<Tuple<string, string>> lTimes = GetLocationTimes(_timeZoneFileContents.ToString());
+
+            List<string> results = ParseResults(lTimes);
+
+            DisplayResults(results);
+
+
+            Console.ReadKey();
+        }
+
+
+        /// <summary>
+        /// Read contents from text file resource
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        static string  ReadTextFileContents(string fileName)
+        {
             StringBuilder _timeZoneFileContents = new StringBuilder();
             try
             {
-                _timeZoneFileContents.Append(Timezone.Main.Properties.Resources.ResourceManager.GetObject("TimezoneFile"));
+                _timeZoneFileContents.Append(Timezone.Main.Properties.Resources.ResourceManager.GetObject(fileName));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Error("There was an error reading the Timezone file : " + ex.Message);
             }
-            
 
-            //Read entries from text file and populate list
-            if (_timeZoneFileContents.Length > 0)
+            return _timeZoneFileContents.ToString();
+        }
+
+
+        /// <summary>
+        /// Extract timezone entries into a list
+        /// </summary>
+        /// <param name="_timeZoneFileContents"></param>
+        /// <returns></returns>
+        static List<Tuple<string, string>> GetLocationTimes(string _timeZoneFileContents)
+        {
+            List<Tuple<string, string>> lTimes = new List<Tuple<string, string>>();
+
+            if (!String.IsNullOrEmpty(_timeZoneFileContents))
             {
                 using (Reader fileReader = new Reader())
                 {
@@ -44,15 +74,24 @@ namespace Timezone.Main
                     catch (Exception ex)
                     {
                         Logger.Error("There was an error reading the Timezone data : " + ex.Message);
-                    }   
+                    }
                 }
             }
 
+            return lTimes;
+        }
 
 
+        /// <summary>
+        /// Create result string for each timezone entry
+        /// </summary>
+        /// <param name="lTimes"></param>
+        /// <returns></returns>
+        static List<string> ParseResults(List<Tuple<string, string>> lTimes)
+        {
+            List<string> results = new List<string>();
 
-
-            if (lTimes.Count>0)
+            if (lTimes.Count > 0)
             {
                 Parser timeZoneParser = new Parser();
 
@@ -65,7 +104,7 @@ namespace Timezone.Main
 
                         if (!String.IsNullOrEmpty(_result))
                         {
-                            Console.WriteLine(_result);
+                            results.Add(_result);
                         }
                     }
                     catch (Exception ex)
@@ -75,10 +114,22 @@ namespace Timezone.Main
                 }
             }
 
-            
+            return results;
+        }
 
-
-            Console.ReadKey();
+        static void DisplayResults(List<string> results)
+        {
+            if (results.Count > 0)
+            {
+                foreach (string result in results)
+                {
+                    Console.WriteLine(result);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No results to display");
+            }
         }
     }
 }
