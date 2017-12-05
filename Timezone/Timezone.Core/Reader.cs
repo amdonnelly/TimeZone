@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Timezone.Core.Interfaces;
 
 namespace Timezone.Core
 {
-
-    public class Reader : IReader, IDisposable                           
+    public sealed class Reader : IReader, IDisposable
     {
         public T Read<T>(string _contents) where T : IList<Tuple<string, string>>, new()
         {
@@ -30,11 +26,17 @@ namespace Timezone.Core
                 }
             }
 
-
-
             return lReturn;
         }
+
+        //TODO - find out why this implements IDisposable, seems unnecessary
         public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
         {
         }
     }

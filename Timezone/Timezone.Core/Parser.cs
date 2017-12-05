@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using log4net;
+using System;
 using System.Text;
-using System.Threading.Tasks;
-
 using Timezone.Core.Interfaces;
-using log4net;
 
 namespace Timezone.Core
 {
-
-	public class Parser : IParser
+    public class Parser : IParser
     {
         private static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -21,49 +16,54 @@ namespace Timezone.Core
         /// <returns></returns>
         private string GetTimeZoneName(string location)
         {
-			
-
-			StringBuilder _result = new StringBuilder();
+            StringBuilder result = new StringBuilder();
 
             switch (location)
             {
                 case "Amsterdam":
-                    _result.Append("W. Europe Standard Time");
+                    result.Append("W. Europe Standard Time");
                     break;
+
                 case "Minsk":
-                    _result.Append("Russian Standard Time");
+                    result.Append("Russian Standard Time");
                     break;
+
                 case "Samoa":
-                    _result.Append("UTC-11");
+                    result.Append("UTC-11");
                     break;
+
                 case "London":
-                    _result.Append("GMT Standard Time");
+                    result.Append("GMT Standard Time");
                     break;
+
                 case "Dublin":
-                    _result.Append("GMT Standard Time");
+                    result.Append("GMT Standard Time");
                     break;
+
                 case "Hawaii":
-                    _result.Append("Hawaiian Standard Time");
+                    result.Append("Hawaiian Standard Time");
                     break;
+
                 case "Alaska":
-                    _result.Append("Alaskan Standard Time");
+                    result.Append("Alaskan Standard Time");
                     break;
+
                 case "Arizona":
-                    _result.Append("Pacific Standard Time");
+                    result.Append("Pacific Standard Time");
                     break;
+
                 default:
-                    _result.Append(string.Empty);
+                    result.Append(string.Empty);
                     break;
             }
 
-            if (_result.Length == 0)
+            if (result.Length == 0)
             {
                 Logger.Info("No timezone name for " + location);
             }
 
-            return _result.ToString();
+            return result.ToString();
         }
-
 
         /// <summary>
         /// Returns DateTime object based on todays date and the supplied time
@@ -72,26 +72,22 @@ namespace Timezone.Core
         /// <returns></returns>
         private DateTime? GetDateTime(string time)
         {
-            String[] _timeParts = time.Split(':');
+            String[] timeParts = time.Split(':');
 
-
-            if (_timeParts.Length == 2)
+            if (timeParts.Length == 2)
             {
                 int _hour, _minute = 0;
 
-                if (int.TryParse(_timeParts[0], out _hour) && int.TryParse(_timeParts[1], out _minute))
+                if (int.TryParse(timeParts[0], out _hour) && int.TryParse(timeParts[1], out _minute))
                 {
                     DateTime _newDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, _hour, _minute, 0);
 
                     return _newDateTime;
                 }
-
             }
 
             return null;
-
         }
-
 
         /// <summary>
         /// Return a string containing the UK date and converted date for the selected location
@@ -100,31 +96,27 @@ namespace Timezone.Core
         /// <param name="timezone"></param>
         /// <returns></returns>
         public string DisplayTime(string time, string location)
-        {			
-			string _timeZoneName = GetTimeZoneName(location);
+        {
+            string timeZoneName = GetTimeZoneName(location);
 
-            if (!String.IsNullOrEmpty(_timeZoneName))
+            if (!String.IsNullOrEmpty(timeZoneName))
             {
-                TimeZoneInfo _timezone = TimeZoneInfo.FindSystemTimeZoneById(_timeZoneName);
-
+                TimeZoneInfo _timezone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneName);
 
                 if (_timezone != null)
                 {
-                    DateTime? _dateTime = GetDateTime(time);
-                    if (_dateTime != null)
+                    DateTime? dateTime = GetDateTime(time);
+                    if (dateTime != null)
                     {
-                        DateTime _ukDateTime = (DateTime)_dateTime;
-                        DateTime _convertedDateTime = TimeZoneInfo.ConvertTime(_ukDateTime, _timezone);
+                        DateTime ukDateTime = (DateTime)dateTime;
+                        DateTime convertedDateTime = TimeZoneInfo.ConvertTime(ukDateTime, _timezone);
 
+                        string result = $"The time in the UK is {ukDateTime.ToString("HH:mm")} and the time in {location} is {convertedDateTime.ToString("HH:mm")}";
 
-                        string _result = $"The time in the UK is {_ukDateTime.Hour}:{_ukDateTime.Minute} and the time in {location} is {_convertedDateTime.Hour}:{_convertedDateTime.Minute}";
-
-                        return _result;
+                        return result;
                     }
                 }
-
             }
-
 
             return null;
         }
