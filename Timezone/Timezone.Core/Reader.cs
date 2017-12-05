@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 
 using Timezone.Core.Interfaces;
 
@@ -13,7 +14,10 @@ namespace Timezone.Core
     {
         public List<Tuple<string, string>> Read(string _contents)
         {
-            List<Tuple<string, string>> lReturn = new List<Tuple<string, string>>();
+			Contract.Requires(!String.IsNullOrEmpty(_contents), "File contents must not be empty");
+
+
+			List<Tuple<string, string>> lReturn = new List<Tuple<string, string>>();
 
 
             if (!String.IsNullOrEmpty(_contents))

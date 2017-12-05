@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 
 using Timezone.Core.Interfaces;
 
 namespace Timezone.Core
 {
-    public class Parser : IParser
+
+	public class Parser : IParser
     {
 
 
@@ -19,7 +21,9 @@ namespace Timezone.Core
         /// <returns></returns>
         private string GetTimeZoneName(string location)
         {
-            StringBuilder _result = new StringBuilder();
+			
+
+			StringBuilder _result = new StringBuilder();
 
             switch (location)
             {
@@ -91,8 +95,11 @@ namespace Timezone.Core
         /// <param name="timezone"></param>
         /// <returns></returns>
         public string DisplayTime(string time, string location)
-        {
-            string _timeZoneName = GetTimeZoneName(location);
+        {			
+			Contract.Requires(!String.IsNullOrEmpty(time), "Time must not be empty");
+			Contract.Requires(!String.IsNullOrEmpty(location), "Location must not be empty");
+
+			string _timeZoneName = GetTimeZoneName(location);
 
             if (!String.IsNullOrEmpty(_timeZoneName))
             {

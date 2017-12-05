@@ -15,9 +15,6 @@ namespace Timezone.Core.Tests
 			fileContents.AppendLine("09:30 Amsterdam");
 			fileContents.AppendLine("17:29 Minsk");
 
-			string expectedOutputLine1 = null;
-			string expectedOutputLine2 = null;
-
 
 			List<Tuple<string, string>> lTimes;
 			using (Reader fileReader = new Reader())
