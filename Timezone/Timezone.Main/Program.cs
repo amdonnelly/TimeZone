@@ -19,7 +19,7 @@ namespace Timezone.Main
         static void Main(string[] args)
         {
             List<Tuple<string, string>> lTimes = new List<Tuple<string, string>>(); ;
-
+  
             //Fetch contents of timezone embedded file
             StringBuilder _timeZoneFileContents = new StringBuilder();
             try
@@ -37,7 +37,14 @@ namespace Timezone.Main
             {
                 using (Reader fileReader = new Reader())
                 {
-                    lTimes = fileReader.Read<List<Tuple<string, string>>>(_timeZoneFileContents.ToString());
+                    try
+                    {
+                        lTimes = fileReader.Read<List<Tuple<string, string>>>(_timeZoneFileContents.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error("There was an error reading the Timezone data : " + ex.Message);
+                    }   
                 }
             }
 
@@ -52,15 +59,23 @@ namespace Timezone.Main
                 //iterate through list and generate result for each entry
                 foreach (Tuple<string, string> _timeZone in lTimes)
                 {
-                    string _result = timeZoneParser.DisplayTime(_timeZone.Item1, _timeZone.Item2);
-
-                    if (!String.IsNullOrEmpty(_result))
+                    try
                     {
-                        Console.WriteLine(_result);
-                    }
+                        string _result = timeZoneParser.DisplayTime(_timeZone.Item1, _timeZone.Item2);
 
+                        if (!String.IsNullOrEmpty(_result))
+                        {
+                            Console.WriteLine(_result);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error("There was an error parsing the results : " + ex.Message);
+                    }
                 }
             }
+
+            
 
 
             Console.ReadKey();
