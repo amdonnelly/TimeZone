@@ -29,7 +29,7 @@ namespace Timezone.Core
                     break;
 
                 case "Samoa":
-                    result.Append("UTC-11");
+                    result.Append("Samoa Standard Time");
                     break;
 
                 case "London":
@@ -49,7 +49,7 @@ namespace Timezone.Core
                     break;
 
                 case "Arizona":
-                    result.Append("Pacific Standard Time");
+                    result.Append("US Mountain Standard Time");
                     break;
 
                 default:
